@@ -14,13 +14,16 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Lob
+    @Column(columnDefinition = "longtext")
     private String gpxCoordinates;
 
     @Enumerated(EnumType.STRING)
     private Level level;
 
     private String name;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @ManyToOne
     private User author;
@@ -30,8 +33,15 @@ public class Route {
     @OneToMany(targetEntity = Comment.class, mappedBy = "route")
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "route")
+    private Set<Picture> pictures;
+
+    @ManyToMany
+    private Set<Category> categories;
+
     public Route() {
         this.comments = new HashSet<>();
+        this.categories = new HashSet<>();
     }
 
     public long getId() {
@@ -94,6 +104,24 @@ public class Route {
 
     public Route setComments(Set<Comment> comments) {
         this.comments = comments;
+        return this;
+    }
+
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public Route setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+        return this;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public Route setCategories(Set<Category> categories) {
+        this.categories = categories;
         return this;
     }
 }
