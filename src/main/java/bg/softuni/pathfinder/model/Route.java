@@ -33,7 +33,7 @@ public class Route {
     @OneToMany(targetEntity = Comment.class, mappedBy = "route")
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "route")
+    @OneToMany(mappedBy = "route", fetch = FetchType.EAGER)
     private Set<Picture> pictures;
 
     @ManyToMany
