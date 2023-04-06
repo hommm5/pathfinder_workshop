@@ -8,5 +8,7 @@ public class PathfinderApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PathfinderApplication.class, args);
 	}
+	public void a(){
 
+	}
 }
